@@ -1,5 +1,4 @@
 import asyncio
-
 from telegram import ReplyKeyboardMarkup
 import logging
 from telegram.ext import Application, MessageHandler, filters, CommandHandler
@@ -15,6 +14,25 @@ logger = logging.getLogger(__name__)
 
 async def echo(update, context):
     await update.message.reply_text("Я получил сообщение " + update.message.text)
+
+
+async def start(update, context):
+    reply_keyboard = [['/Reminders', '/Projects']]
+    markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
+    await update.message.reply_text("Welcome !", reply_markup=markup)
+
+
+async def Reminders(update, context):
+    reply_keyboard = [['/Set', '/Change'],
+                      ['/Check']]
+    markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
+    await update.message.reply_text("Choose your option ", reply_markup=markup)
+
+
+async def Projects(update, context):
+    reply_keyboard = [['/Reminders', '/Projects']]
+    markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
+    await update.message.reply_text("Welcome !", reply_markup=markup)
 
 
 def main():
